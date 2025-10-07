@@ -1,19 +1,45 @@
 ﻿@{
     ViewData["Title"] = "Login";
 }
+
 <div class="container mt-5">
-    <h2>Login</h2>
-    <form method="post" asp-action="Login">
-        <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input name="username" class="form-control" required />
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-header text-white text-center" style="background: linear-gradient(90deg, #0d6efd, #6610f2);">
+                    <h3 class="mb-0 fw-bold">Login</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Login">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input name="username" class="form-control" placeholder="Enter username" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter password" required />
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(ViewBag.Error))
+                        {
+                            <div class="alert alert-danger text-center">@ViewBag.Error</div>
+                        }
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-gradient-primary btn-lg text-white fw-bold" style="background: linear-gradient(90deg, #0d6efd, #6610f2);">Login</button>
+                            <a asp-action="Register" class="btn btn-outline-secondary btn-lg fw-semibold">Register</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center text-muted">
+                    Employee Management System
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" required />
-        </div>
-        <button class="btn btn-primary">Login</button>
-        <a asp-action="Register" class="btn btn-link">Register</a>
-        <span class="text-danger">@ViewBag.Error</span>
-    </form>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
