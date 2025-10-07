@@ -1,7 +1,7 @@
 ﻿@model EmployeeManagement.Models.Employee
 <div class="container mt-4">
     <h2>@ViewData["Title"] Employee</h2>
-    <form asp-action="@ViewData["Action"]">
+    <form asp-action="Edit" method="post">
         <div class="mb-3">
             <label asp-for="FullName" class="form-label"></label>
             <input asp-for="FullName" class="form-control" />
