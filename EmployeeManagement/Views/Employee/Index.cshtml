@@ -4,11 +4,26 @@
 }
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="fw-bold text-primary">Employees</h2>
-        <a asp-action="Create" class="btn btn-success btn-lg fw-bold">
-            <i class="bi bi-plus-circle"></i> Add New Employee
-        </a>
+    <div class="row align-items-center mb-4 pb-2 border-bottom">
+        <div class="col-md-4">
+            <h2 class="fw-bolder text-dark mb-2 mb-md-0">Employee Directory</h2>
+        </div>
+
+        <div class="col-md-5 mb-3 mb-md-0">
+            <div class="input-group input-group-lg rounded-3 shadow-sm">
+                <input id="searchInput" type="text" class="form-control border-0 rounded-start-3 ps-4"
+                       placeholder="Search by name or department..." />
+                <span class="input-group-text bg-white border-0 rounded-end-3">
+                    <i class="bi bi-search text-muted"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-3 text-md-end">
+            <a asp-action="Create" class="btn btn-primary btn-lg fw-bold shadow-sm w-100 w-md-auto">
+                <i class="bi bi-person-plus me-2"></i> Add New Employee
+            </a>
+        </div>
     </div>
 
     <div class="card shadow-sm border-0">
@@ -88,6 +103,24 @@
             document.getElementById('empName').textContent = empName;
             document.getElementById('empId').value = empId;
             document.getElementById('deleteForm').action = '/Employee/Delete/' + empId;
+        });
+
+
+         const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keyup', function () {
+            const filter = searchInput.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr');
+
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const department = row.cells[2].textContent.toLowerCase();
+
+                if (name.includes(filter) || department.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         });
     </script>
 }

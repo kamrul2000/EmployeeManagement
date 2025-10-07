@@ -18,6 +18,7 @@ namespace EmployeeManagement.Controllers
         public async Task<IActionResult> Index()
         {
             var employees = await _employeeService.GetAllAsync();
+
             return View(employees);
         }
         [Authorize(Roles = "Admin")]
