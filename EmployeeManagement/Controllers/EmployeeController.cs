@@ -56,17 +56,10 @@ namespace EmployeeManagement.Controllers
             }
             return View(employee);
         }
+
+        [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
-        {
-            var employee = await _employeeService.GetByIdAsync(id);
-            if (employee == null) return NotFound();
-            return View(employee);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _employeeService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));

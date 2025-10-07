@@ -5,6 +5,7 @@
 <div class="container mt-4">
     <h2>Employees</h2>
     <a asp-action="Create" class="btn btn-primary mb-2">Add New Employee</a>
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -28,10 +29,54 @@
                     <td>
                         <a asp-action="Details" asp-route-id="@e.Id" class="btn btn-info btn-sm">Details</a>
                         <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-warning btn-sm">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@e.Id" class="btn btn-danger btn-sm">Delete</a>
+
+                        <button type="button" class="btn btn-danger btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                data-id="@e.Id"
+                                data-name="@e.FullName">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong id="empName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post">
+                    <input type="hidden" name="id" id="empId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var empId = button.getAttribute('data-id');
+            var empName = button.getAttribute('data-name');
+
+            document.getElementById('empName').textContent = empName;
+            document.getElementById('empId').value = empId;
+
+        document.getElementById('deleteForm').action = '/Employee/Delete/' + empId;
+                });
+    </script>
+}
