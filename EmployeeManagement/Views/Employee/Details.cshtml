@@ -1,0 +1,10 @@
+﻿@model EmployeeManagement.Models.Employee
+<div class="container mt-4">
+    <h2>Employee Details</h2>
+    <p><b>Name:</b> @Model.FullName</p>
+    <p><b>Email:</b> @Model.Email</p>
+    <p><b>Department:</b> @Model.Department</p>
+    <p><b>Join Date:</b> @Model.JoinDate.ToShortDateString()</p>
+    <p><b>Salary:</b> @Model.Salary</p>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>
