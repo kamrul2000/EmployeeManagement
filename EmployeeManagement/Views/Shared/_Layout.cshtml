@@ -54,6 +54,23 @@
             @RenderBody()
         </main>
     </div>
+    <!-- Toast container -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+        <div id="successToast"
+             class="toast align-items-center border-0 shadow-lg"
+             role="alert" aria-live="assertive" aria-atomic="true"
+             style="background: linear-gradient(90deg, #28a745, #20c997); color: #fff;">
+            <div class="d-flex">
+                <div class="toast-body fw-semibold">
+                    @TempData["SuccessMessage"]
+                </div>
+                <button type="button"
+                        class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -66,3 +83,15 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var toastEl = document.getElementById("successToast");
+        if (toastEl) {
+            var message = toastEl.querySelector(".toast-body").textContent.trim();
+            if (message !== "") {
+                var toast = new bootstrap.Toast(toastEl);
+                toast.show();
+            }
+        }
+    });
+</script>

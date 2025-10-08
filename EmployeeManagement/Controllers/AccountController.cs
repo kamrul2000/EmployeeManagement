@@ -35,6 +35,7 @@ namespace EmployeeManagement.Controllers
                 var principal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                TempData["SuccessMessage"] = "Welcome back, " + user.Username + "!";
 
                 return RedirectToAction("Index", "Employee");
             }
@@ -53,6 +54,7 @@ namespace EmployeeManagement.Controllers
                 var success = await _accountService.RegisterAsync(user);
                 if (success)
                 {
+                    TempData["SuccessMessage"] = "Registration successful! You can now login.";
                     return RedirectToAction("Login");
                 }
                 ViewBag.Error = "Username already exists";
