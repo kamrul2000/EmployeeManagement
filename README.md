@@ -96,10 +96,5 @@ The app will run at:
 🔹 Delete Confirmation Modal
 <img width="1918" height="556" alt="DeleteConfirmModal" src="https://github.com/user-attachments/assets/867ac8aa-f276-4164-831e-f2689216af88" />
 
-👨‍💻 Author
-
-Md. Kamrul Hassan Khan
-
-📧 Email: kamrulmuh39@gmail.com
 
 
